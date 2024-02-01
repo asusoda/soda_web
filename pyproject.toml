@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "soda-backend"
+name = "soda_web"
 version = "0.1.0"
 description = ""
 authors = ["Ben Juntilla <ben@benjuntilla.com>"]
