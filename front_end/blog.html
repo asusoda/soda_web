@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> SoDA blog</title>
+    <link rel="stylesheet" href="blog.css">
+    <link href='https://fonts.googleapis.com/css?family=Source Sans Pro' rel='stylesheet'>
+</head>
+<body>
+    <header>
+        <div class = page-title> 
+            <h1> SoDA blog </h1>
+        </div>
+    </header>
+    <main>
+        <article class="blog-post">
+            <header class="blog-post-header">
+                <nav aria-label="Breadcrumb">
+                    <ul class="breadcrumb">
+                        <li><a href="link">Blog</a></li>
+                        <li><a href="#">{{ page.category }}</a></li>
+                    </ul>
+                </nav>
+                <h1>
+                    <a
+                    href = "link"
+                    class="blog-link"
+                    > {{ page.title }}</a>
+                </h1>
+                
+                <div class="meta">
+                    <span class="author">{{ page.owner.get_full_name }}</span>
+                    <span class="date">{{ page.publication_date|date:"d M Y" }}</span>
+                    <span class="read-time">{{ page.read_time }} min read</span>
+                </div>
+            </header>
+
+            <div class="blog-post-content">
+                {{ page.body | richtext }}
+            </div>
+        </article>
+    </main>
+    <footer class="page-footer">
+        <a
+        href="link"
+        aria-label="Main CSC Website"
+        class="footer-link"
+        >
+        &copy; 2024 SoDA </a
+        >
+        
+    </footer>
+</body>
+</html>
