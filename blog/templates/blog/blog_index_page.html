@@ -1,25 +1,97 @@
 {% extends "base.html" %}
-
+{% load static %}
+ 
 {% load wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}template-blogindexpage{% endblock %}
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> SoDA blog</title>
+    {% block extra_css %}
+    <link rel="stylesheet"  type="text/css" href="{% static 'css/blog_page_index.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Source Sans Pro' rel='stylesheet'>
+    {% endblock %}
+</head>
+
 {% block content %}
-    <h1>{{ page.title }}</h1>
+<body>
+    <header>
+        <div class = page-title> 
+            <h1> SoDA blog </h1>
+        </div>
+    </header>
+    
+    <main>
+        <div class = nav-title> <h2> Topics </h2> </div>
+        <div class = "tags_all" >
+            {% for post in page.get_children %}
+                {% with tags=post.specific.tags.all %}
+                    {% if tags %}
+                        {% for tag in tags %}
+                            <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            {% endfor %}
+        </div>
 
-    <div class="intro">{{ page.intro|richtext }}</div>
+        <div class = post-title> <h2> Posts </h2> </div>
 
-    {% for post in blogpages %}
-        {% with post=post.specific %}
-            <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
+        {% for post in page.get_children %} <!-- content in loop won't appear until generated-->
+        <article class="blog-post">
+            <header class="blog-post-header">
 
-            <!-- Add this: -->
-            {% with post.main_image as main_image %}
-                {% if main_image %}{% image main_image fill-160x100 %}{% endif %}
-            {% endwith %}
+                <nav aria-label="article_tags">
+                    <h1>
+                        <a
+                        href = "{% pageurl post %}"
+                        class="blog_title_link"
+                        > {{ post.title }} </a>
+                    </h1>
+                    
+                    <div class="blog_tags"> 
+                        {% with tags=post.specific.tags.all %}
+                            {% if tags %}
+                                {% for tag in tags %}
+                                    <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                    
+                    <div class="blog_meta_data">
+                        <div class = "authors">
+                            {% with authors=post.specific.authors.all %}
+                                {% if authors %}
+                                    {% for author in authors %}
+                                        <span> {{ author.name }} </span>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %} 
+                        </div>
+                        <span class="date">{{ post.specific.date }} </span>
+                    </div>
+                </header>
 
-            <p>{{ post.intro }}</p>
-            {{ post.body|richtext }}
-        {% endwith %}
-    {% endfor %}
+        </article>
+        {% endfor %}
+    </main>
+
+    <footer class="page-footer">
+        <a
+        href="link"
+        aria-label="Main CSC Website"
+        class="footer-link"
+        >
+        &copy; 2024 SoDA </a
+        >
+        
+    </footer>
+</body>
+
+</html>
 {% endblock %}
