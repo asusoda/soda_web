@@ -35,10 +35,35 @@
                     <span class="read-time">{{ page.read_time }} min read</span>
                 </div>
             </header>
-
+            <div class="blog-post-other">
+                <aside>
+                    <p class="blog-post-other-p">ads here</p>
+                    <h2>Also Read</h2>
+                    <ul class="blog-post-other-ul">
+                        <li>
+                             preview blog and title 1
+                        </li>
+                        <li>
+                            preview blog and title 2
+                        </li>
+                        <li>
+                            preview blog and title 3
+                        </li>
+                    </ul>
+                </aside>
+            </div>
             <div class="blog-post-content">
                 {{ page.body | richtext }}
             </div>
+
+            <nav aria-label="Breadcrumb">
+                <p>Liked the blog? </p>
+                <ul class="breadcrumb">
+                    <li><a href="link">Instagram icon </a></li>
+                    <li><a href="link">Twitter icon</a></li>
+                    <li><a href="link">other icons</a></li>
+                </ul>
+            </nav>
         </article>
     </main>
     <footer class="page-footer">
